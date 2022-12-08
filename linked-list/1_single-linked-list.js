@@ -145,4 +145,25 @@ class SinglyLinkedList {
 
         return toBeRemoved;
     }
+
+    
+    reverse(){
+
+        const oldHead = this.head;
+        const oldTail = this.tail;
+
+        this.head = oldTail;
+
+        let current = oldHead;
+        let next = null;
+
+        for(let i=0; i<this.size; i++){
+            const tempNext = current.next;
+            current.next = next;
+            next = current;
+            current = tempNext;
+        }
+        this.tail = oldHead;
+        return this;
+    }
 }
