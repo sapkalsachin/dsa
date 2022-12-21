@@ -51,6 +51,50 @@ class Trie{
     }
 
     delete(key){
+
+        const isEmptyChildren = (children)=>{
+            for(let i=0; i<children.length; i++){
+                if(children[i] !== null){
+                    return false;
+                }
+            }
+            return true;
+        }
+        
+        const deleteHelper = (currentNode, key, keyLen, index)=>{
+            let deleteSelf = false;
+            if(this.root === null || key === null){
+                return;
+            }
+
+            //if currentNode has last char of key
+            if(keyLen === index){
+                currentNode.isEnd = false;
+
+                //if currentNode doesn't have children, mark it for deletion
+                if(isEmptyChildren(currentNode.children)){
+                    deleteSelf = true;
+                }
+            }else{
+                const currentKeyIndex = this.getIndex(key[index])
+                const childNode = currentNode.children[currentKeyIndex];
+                let deleteCurrent = deleteHelper(childNode, key, keyLen, index + 1);
+
+                //set childNode to null if deleteSelf is true
+                if(deleteCurrent){
+                    currentNode.children[currentKeyIndex] = null;
+
+                    //if current node doesn't have children, mark it for deletion
+                    if(isEmptyChildren(currentNode.children)){
+                        deleteSelf = true;
+                    }
+                }
+            }
+
+            return deleteSelf;
+        }
+
+        deleteHelper(this.root, key, key.length, 0)
         return null;
     }
 
