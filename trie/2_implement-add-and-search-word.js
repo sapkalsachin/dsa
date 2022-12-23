@@ -99,10 +99,3 @@ WordDictionary.prototype.search = function(word) {
 
     return dfs(this.root, word, 0)
 };
-
-/** 
- * Your WordDictionary object will be instantiated and called as such:
- * var obj = new WordDictionary()
- * obj.addWord(word)
- * var param_2 = obj.search(word)
- */
