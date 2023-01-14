@@ -33,4 +33,25 @@ class Graph{
 
         delete this.adjacencyList[v]
     }
+
+    dfsRecursive(start){
+        const result = [];
+        const visited = {};
+        // visited[start] = true;
+        const adjacencyList = this.adjacencyList;
+        const dfs = (v) => {
+            if(!v) return null;
+            visited[v] = true;
+            result.push(v);
+
+            adjacencyList[v].forEach(next => {
+                if(!visited[next]){
+                    dfs(next);
+                }
+            })
+        }
+
+        dfs(start);
+        return result;
+    }
 }
