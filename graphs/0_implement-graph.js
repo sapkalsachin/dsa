@@ -54,4 +54,53 @@ class Graph{
         dfs(start);
         return result;
     }
+
+    dfsIterative(start){
+        const result = [];
+        const stack = [];
+        stack.push(start);
+        const visited = {};
+        visited[start] = true;
+        
+        while(stack.length){
+             const current = stack.pop();
+
+            result.push(current);
+
+            this.adjacencyList[current].forEach(v => {
+                if(!visited[v]){
+                    stack.push(v);
+                    visited[v] = true;
+                }
+            });
+        }
+
+        return result;
+    }
+
+
+    bfs(start){
+        const result = [];
+        const visited = {};
+        visited[start] = true;
+        const queue = [];
+        queue.push(start);
+
+        while(queue.length){
+            const current = queue.shift();
+            result.push(current);
+
+            this.adjacencyList[current].forEach(v => {
+                if(!visited[v]){
+                    visited[v] = true;
+                    queue.push(v);
+                }
+            })
+
+
+        }
+
+return result;
+        
+    }
 }
